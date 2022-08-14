@@ -2,6 +2,7 @@ package tutorial.simplerest.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -21,25 +22,24 @@ public class Student {
     Long id;
     String name;
     String email;
-    LocalDate dateOfBirth;
+    LocalDate date_of_birth;
+    @Transient
     int age;
 
     public Student() {
     }
 
-    public Student(String name, String email, LocalDate dateOfBirth, int age) {
+    public Student(String name, String email, LocalDate date_of_birth) {
         this.name = name;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.age = age;
+        this.date_of_birth = date_of_birth;
     }
 
-    public Student(Long id, String name, String email, LocalDate dateOfBirth, int age) {
+    public Student(Long id, String name, String email, LocalDate date_of_birth) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.age = age;
+        this.date_of_birth = date_of_birth;
     }
 
     public Long getId() {
@@ -66,16 +66,16 @@ public class Student {
         this.email = email;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public LocalDate getDate_of_birth() {
+        return date_of_birth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDate_of_birth(LocalDate dateOfBirth) {
+        this.date_of_birth = dateOfBirth;
     }
 
     public int getAge() {
-        return age;
+        return Period.between(this.date_of_birth, LocalDate.now()).getYears();
     }
 
     public void setAge(int age) {
